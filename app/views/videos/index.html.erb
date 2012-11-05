@@ -1,0 +1,28 @@
+<div id="form">	
+	<h2> Videos </h2>
+	<hr />
+	<%= form_for(@video, :html => { :multipart => true, :class => "" }, :remote => true) do |f| %>  
+		<div id="error_explanation" class="alert alert-error" style="display:none;">
+			<%= error(@video) if @video.errors.any? %>
+		</div>
+
+		<div class="field">
+			<%= f.label :title %>
+			<%= f.text_field :title %>
+		</div>
+
+		<div class="field">
+			<%= f.label :archive %>
+			<%= f.file_field :archive %>
+		</div>
+
+		<div class="submit">
+			<%= f.submit :class => "btn btn-primary" %>
+		</div>
+	<% end %>
+</div> 	
+
+<div id="list_videos">
+	<h4> Listagem de videos </h4>
+ 	<%= render 'list_videos' %>		
+</div>

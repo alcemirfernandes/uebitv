@@ -1,0 +1,51 @@
+<% unless @videos.blank? %>
+	<ul id="header">
+		<li>
+			<div class="position"> Posição </div>	
+			<div class="title"> Titulo </div>
+			<div class="live"> No ar? </div>	
+			<div class="queue"> Na fila? </div>	
+			<div class="actions"> </div>
+		</li>
+	</ul>
+	
+	<ul id="sortable">
+		<% @videos.each do |video| %>
+	    	<li class="navbar-inner" id="<%=video.id%>">			 			
+				<div class="position"><span class="badge"> <%= video.position %> </span></div>	
+				<div class="title"> <%= truncate(video.title, :length => 40) %> </div>
+				<div class="live"> <%=  video.live ? image_tag("correct.png") : '' %> </div>	
+				<div class="queue"> <%=  video.queue ? image_tag("correct.png") : '' %> </div>
+				<div class="actions"> 
+					<%= link_to 'Show', video %>
+			    	<%= link_to 'Edit', edit_video_path(video) %>
+			    	<%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %>
+				</div>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<script>
+   $(function() {
+       $( "#sortable" ).sortable({
+           revert: true,
+   	       stop: function(event, ui) {
+			   var position = ui.item.index()  + 1;
+			   var id = ui.item.attr("id");
+  			   var url = "/change_position/"+id+"/"+position;
+
+			   $.ajax({
+					type: "POST",
+					url: url,
+					beforeSend: function(){
+					},
+					success: function(response){
+					}
+			   });
+		   }
+       });
+
+       $( "ul, li" ).disableSelection();
+   });
+</script>
