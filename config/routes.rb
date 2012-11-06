@@ -4,7 +4,7 @@ TomTV::Application.routes.draw do
   match 'change_position/:id/:position' => 'videos#change_position', :as => :change_position
 
   match 'next' => 'videos#next', :as => :next
-  match 'in_live' => 'videos#in_live', :as => :in_live
+  match 'inlive' => 'videos#inlive', :as => :inlive
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

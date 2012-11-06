@@ -1,5 +1,7 @@
 #form { 
-		padding: 25px; 
+  	border: 1px solid #F5F5F5;
+    margin: 25px;
+  	padding: 10px; 
 } 
 
 ul { 
@@ -18,15 +20,14 @@ ul {
 
 #header {
 	background-color: #1B1B1B;
-  background-image: linear-gradient(to bottom, #666, #111);
+  background-image: linear-gradient(to bottom, #666, #666);
   background-repeat: repeat-x;
   border-color: #252525;	
-  border-radius: 4px;
 	margin-bottom: 1px;
 }
 
 #header li { 
-		color: #999999;
+		color: #fff;
  	  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 		font-family: verdana,arial,helvetica,sans-serif;
     font-size: 13px;
@@ -35,7 +36,7 @@ ul {
 		padding: 10px;
 }
 
-.title, .live, .queue, .position {
+.title, .live, .queue, .position, .size, .box-sortable {
 		display: inline-block;
 }
 
@@ -62,6 +63,10 @@ ul {
  	  margin-right: 10px;
 }
 
+.size {
+	width: 100px;
+}
+
 .live {
     width: 65px;
 }
@@ -78,6 +83,59 @@ ul {
 	margin-top: 20px;
 }
 
-#error_explanation li {
-	
+#loading {
+  background: url("/images/loader.gif") no-repeat scroll 50% 25% #FFFFFF;
+  display: block;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+}
+
+.box-sortable {
+	border: 2px dashed;
+	width: 99.6%;
+	height: 30px;
+	margin-top: 5px;
+}
+
+#sortable .navbar-inner { 
+	background-image: linear-gradient(to bottom, #F2F2F2, #F2F2F2);
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.submit .save {
+	display: inline-block;
+  *display: inline;
+  padding: 8px 15px;
+  margin-bottom: 0;
+  *margin-left: .3em;
+  font-size: 14px;
+  line-height: 20px;
+  *line-height: 20px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #e76f40;
+  *background-color: #e76f40;
+  background-repeat: repeat-x;
+  border: 0;
+  *border: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.submit .save:hover {
+	background-color: #e46138;
+  *background-color: #e46138;
+}
+
+.logo {
+	margin:	20px 20px 0px 20px;
 }

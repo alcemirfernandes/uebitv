@@ -33,6 +33,10 @@ module TomTV
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
+    config.i18n.default_locale = "pt-BR"
+    
+    config.active_record.default_timezone = :local
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

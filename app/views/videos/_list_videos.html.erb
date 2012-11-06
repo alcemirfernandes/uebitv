@@ -1,11 +1,13 @@
 <% unless @videos.blank? %>
+	<h4 class="breadcrumb"> Meus vídeos </h4>
 	<ul id="header">
 		<li>
 			<div class="position"> Posição </div>	
-			<div class="title"> Titulo </div>
-			<div class="live"> No ar? </div>	
-			<div class="queue"> Na fila? </div>	
-			<div class="actions"> </div>
+			<div class="title"> Título </div>
+			<div class="title"> Arquivo </div>
+			<div class="size"> Tamanho </div>
+			<div class="live"> No ar </div>	
+			<div class="queue"> Na fila </div>	
 		</li>
 	</ul>
 	
@@ -14,18 +16,14 @@
 	    	<li class="navbar-inner" id="<%=video.id%>">			 			
 				<div class="position"><span class="badge"> <%= video.position %> </span></div>	
 				<div class="title"> <%= truncate(video.title, :length => 40) %> </div>
+				<div class="title"> <%= video.archive_file_name %> </div>
+				<div class="size"> <%= number_with_precision ((video.archive_file_size / 1.kilobyte)  / 1000.0), :precision => 2 %> MB </div>
 				<div class="live"> <%=  video.live ? image_tag("correct.png") : '' %> </div>	
 				<div class="queue"> <%=  video.queue ? image_tag("correct.png") : '' %> </div>
-				<div class="actions"> 
-					<%= link_to 'Show', video %>
-			    	<%= link_to 'Edit', edit_video_path(video) %>
-			    	<%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %>
-				</div>
 			</li>
 		<% end %>
 	</ul>
 <% end %>
-
 <script>
    $(function() {
        $( "#sortable" ).sortable({
@@ -39,11 +37,22 @@
 					type: "POST",
 					url: url,
 					beforeSend: function(){
+						jQuery("#loading").fadeIn();
 					},
 					success: function(response){
+						jQuery("#loading").fadeOut();
 					}
 			   });
-		   }
+		   },
+		   
+		  placeholder: {
+		        element: function(currentItem) {
+		            return $("<em class='box-sortable'></em>")[0];
+		        },
+		        update: function(container, p) {
+		            return;
+		        }
+		    }
        });
 
        $( "ul, li" ).disableSelection();

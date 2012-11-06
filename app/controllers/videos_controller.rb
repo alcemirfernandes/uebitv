@@ -75,39 +75,45 @@ class VideosController < ApplicationController
   
   def change_position
     video = Video.find params[:id]
-    video.order_positions(params[:position]) if video    
+    video.order_positions(params[:position]) if video 
+    @videos = Video.all_order_position
   end
   
   
   def next
     live = Video.in_live
     next_video = Video.next
-        
-    next_video.update_attribute(:live, true) if live.blank?
-    next_video.update_attribute(:queue, true) if live
+    
+    # primeira chamada     
+    next_video.update_attributes(:live => true) if live.blank?
+    
+    # verifica se o que esta na fila é diferente do proximo para atualizar campo.
+    in_queue = Video.in_queue  
+    in_queue.update_attribute(:queue, false) if in_queue && in_queue != next_video
+    
+    # proximas chamadas
+    if live
+      next_video.update_attribute(:queue, true)   
+      live.update_attribute(:queue, false) 
+    end
     
     render :text => "#{next_video.title} [#{next_video.archive_file_name}]"
   end
   
-  def in_live
-    # obtem proximo video
-    current_video = Video.next        
-
-    # atualiza proximo video como ao vivo
-    current_video.update_attributes(:live => true, :queue => false) if current_video
-    
-    # obtem proximo video 
-    next_video = Video.next
-
-    # adiciona proximo video na fila
-    next_video.update_attribute(:queue, true) if next_video    
-    
-    
+  def inlive
+  
     # verifica se existe um video tocando
-    live = Video.in_live        
-    
+    current_video = Video.in_live        
+
     # atualiza o video que esta tocando para false    
-    live.update_attributes(:live => false) if live
+    current_video.update_attributes(:live => false) if current_video
+      
+    # obtem proximo video
+    next_video = Video.next        
+    
+    # atualiza proximo video como ao vivo
+    next_video.update_attributes(:live => true) if next_video         
+  
 
     render :text => "#{next_video.title} [#{next_video.archive_file_name}]"
   end

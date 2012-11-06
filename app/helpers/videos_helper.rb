@@ -1,6 +1,7 @@
 module VideosHelper
   def error(video)
     html = ""
+    html << "<button data-dismiss='alert' class='close' type='button' onclick='close_notification()'>x</button>"
 	  html << "<h2>#{pluralize(video.errors.count, 'erros')} impediram que este video fosse salvo:</h2>"
 	  html << "<ul>"
       video.errors.full_messages.each do |msg| 

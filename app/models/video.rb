@@ -4,12 +4,17 @@ class Video < ActiveRecord::Base
   before_create :rename_file
   
   validates_presence_of :title
-  validates_attachment :archive, :presence => true, :size => { :in => 0..10000.kilobytes }
+  validates_attachment :archive, 
+                       :presence => true, 
+                       :size => { :in => 0..10000.kilobytes }
+#                       , 
+#                       :content_type => ["video/mp4", "video/flv"] 
   
   has_attached_file :archive, 
                     :url => '/system/media/archives/:id_partition/:style/:basename.:content_type_extension',
                     :path => ":rails_root/public/system/media/archives/:id_partition/:style/:basename.:content_type_extension"
   
+  scope :views_asc, order("views ASC")
   scope :position_asc, order("position ASC")
   scope :all_order_position, where("position > 0").position_asc
                         
@@ -24,18 +29,31 @@ class Video < ActiveRecord::Base
    self.archive.instance_write :file_name, "#{Digest::SHA1.hexdigest(seed)[0,10]}#{extension}"
   end
   
-  def self.next
-    _next = where("queue = true").position_asc.first
+  def self.next        
+    _next = where("queue = true AND live = false").first
     
-    if _next.blank?
-      _next = where("live = false").position_asc.first
-    end    
+    if !_next
+      _current = where("live = true").first
+      if _current
+        _next = where("position = ?", (_current.position + 1)).first            
+
+        unless _next
+          _next = Video.all_order_position.first
+        end
+      else
+        _next = Video.all_order_position.first
+      end
+    end
     
     _next
   end
   
   def self.in_live
-    where("live = true").position_asc.first
+    where("live = true").views_asc.position_asc.first
+  end
+  
+  def self.in_queue
+    where("queue = true").views_asc.position_asc.first
   end
   
   def set_position

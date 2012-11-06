@@ -6,9 +6,11 @@
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
-<body>
+	<body>
+		<div id="loading" style="display:none;">
+		</div>	
+		<%= image_tag "uebitv.png", :class => 'logo' %>
+		<%= yield %>
 
-<%= yield %>
-
-</body>
+	</body>
 </html>
