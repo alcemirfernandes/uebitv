@@ -56,7 +56,7 @@ class VideosController < ApplicationController
       live.update_attribute(:queue, false) 
     end
     
-    render :text => "#{next_video.title} [#{next_video.archive_file_name}]"
+    render :text => "#{next_video.archive_file_name}"
   end
   
   def inlive
@@ -74,7 +74,7 @@ class VideosController < ApplicationController
     next_video.update_attributes(:live => true) if next_video         
   
 
-    render :text => "#{next_video.title} [#{next_video.archive_file_name}]"
+    render :text => "OK"
   end  
   
   def player
