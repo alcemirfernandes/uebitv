@@ -1,8 +1,15 @@
-#form { 
-  	border: 1px solid #F5F5F5;
-    margin: 25px;
-  	padding: 10px; 
+body {   	
+    padding: 25px;
 } 
+
+#form {
+	border: 1px solid #F5F5F5;  	
+	padding: 10px; 	
+}
+
+#new_video {
+	margin: 0;
+}
 
 ul { 
 		list-style: none; 
@@ -15,7 +22,7 @@ ul {
 }
 
 #list_videos {
-	margin: 0 25px;
+	margin-top: 20px;
 }
 
 #header {
@@ -138,6 +145,10 @@ ul {
 
 .logo {
 	margin:	20px 20px 0px 20px;
+}
+
+.left {
+	margin-bottom: 25px;
 }
 
 .rigth {

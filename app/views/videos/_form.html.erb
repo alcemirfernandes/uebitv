@@ -1,0 +1,23 @@
+<div id="form">		
+	<%= form_for(@video, :html => { :multipart => true, :class => "" }) do |f| %>  
+		<%= error(@video) if @video.errors.any? %>
+
+		<div class="field">
+			<%= f.label :title, "Título" %>
+			<%= f.text_field :title %>
+		</div>
+
+		<div class="field">
+			<%= f.label :archive, "Arquivo" %>
+			<%= f.file_field :archive %>
+		</div>
+
+		<div class="submit">
+			<%= f.submit :class => "save" %>
+		</div>
+	<% end %>
+</div> 	
+
+<div id="list_videos">	
+ 	<%= render 'list_videos' %>		
+</div>

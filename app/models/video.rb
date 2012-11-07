@@ -6,9 +6,8 @@ class Video < ActiveRecord::Base
   validates_presence_of :title
   validates_attachment :archive, 
                        :presence => true, 
+                       :content_type => { :content_type => ["video/mp4", "video/flv"] },
                        :size => { :in => 0..10000.kilobytes }
-#                       , 
-#                       :content_type => ["video/mp4", "video/flv"] 
   
   has_attached_file :archive, 
                     :url => '/system/media/archives/:id_partition/:style/:basename.:content_type_extension',

@@ -226,7 +226,7 @@ pt-BR:
         position: Posição
         title: Título
         archive: Arquivo        
-        
+        archive_content_type: Extensão 
   devise:
     failure:
       already_authenticated: 'Você já está logado.'
