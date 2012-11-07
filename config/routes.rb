@@ -5,6 +5,7 @@ TomTV::Application.routes.draw do
 
   match 'next' => 'videos#next', :as => :next
   match 'inlive' => 'videos#inlive', :as => :inlive
+  root :to => "videos#index"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
