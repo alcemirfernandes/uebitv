@@ -78,7 +78,7 @@ class VideosController < ApplicationController
   end  
   
   def player
-    render :layout => false
+    render :layout => true
   end
 
 protected

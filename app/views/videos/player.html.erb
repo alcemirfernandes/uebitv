@@ -1,3 +1,46 @@
+<script type='text/javascript' src='/jwplayer/jwplayer.js'></script>
+
 <div>
-	<h1>Player</h1>
+	
+	<p>
+		<div id='mediaplayer'></div>
+
+		<script type="text/javascript">
+		  jwplayer('mediaplayer').setup({
+		    'id': 'playerID',
+
+		    'backcolor': '3A3A3C',
+			'frontcolor': 'FF3333',
+			'lightcolor': 'FF3333',
+			'screencolor': '3A3A3C',
+			'dock': 'false',
+			'stretching': 'fill',
+			'controlbar': 'bottom',
+
+		    'width': '320',
+		    'height': '240',
+
+		    'provider': 'rtmp',
+		    'streamer': 'rtmp://192.168.1.7:1935/tomtv',
+		    'file': 'tv',
+   
+		    'modes': [
+		        {type: 'flash', src: '/jwplayer/player.swf'},
+
+		        {
+		          type: 'html5',
+		          config: {
+		           'file': 'playlist.m3u8',
+		           'provider': 'http://192.168.1.7:1935/tomtv/tv/'
+		          }
+		        }
+		    ]
+		  });
+		</script>
+	</p>
+	
+	<i class="icon-facetime-video"></i>
+	<%= link_to "Player on Android", "rtsp://192.168.1.7:1935/tomtv/_definst_/tv", :target => "blank" %>
+	
 </div>
+
