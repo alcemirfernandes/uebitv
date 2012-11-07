@@ -9,7 +9,14 @@
 	<body>
 		<div id="loading" style="display:none;">
 		</div>	
-		<%= image_tag "uebitv.png", :class => 'logo' %>
+		<div> 
+			<div class="left">
+				<%= image_tag "uebitv.png", :class => 'logo' %> 
+			</div>	
+			<div class="rigth">
+				<%= link_to "Abrir TV", player_path, :target => "blank" %> 
+			</div>
+		</div>
 		<%= yield %>
 
 	</body>

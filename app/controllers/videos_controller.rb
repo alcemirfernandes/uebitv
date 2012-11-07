@@ -117,4 +117,9 @@ class VideosController < ApplicationController
 
     render :text => "#{next_video.title} [#{next_video.archive_file_name}]"
   end
+  
+  
+  def player
+    render :layout => false
+  end
 end
