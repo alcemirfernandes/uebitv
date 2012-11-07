@@ -21,8 +21,8 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(params[:video])
-
+    @video = Video.new
+     @video.set_nginx_video(params)
      respond_to do |format|
        if @video.save
          @videos = Video.all_order_position

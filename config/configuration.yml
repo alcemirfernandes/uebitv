@@ -1,0 +1,16 @@
+default: &DEFAULT
+    video:
+      url: "/system/media/archives/:id_partition/:style/:basename.:content_type_extension"
+      path: ":rails_root/public/system/media/archives/:id_partition/:style/:basename.:content_type_extension"
+   
+development:
+    <<: *DEFAULT
+
+test:
+    <<: *DEFAULT
+    email:
+        delivery: test
+
+production:
+    <<: *DEFAULT
+    display_errors: false

@@ -10,8 +10,8 @@ class Video < ActiveRecord::Base
                        :size => { :in => 0..10000.kilobytes }
   
   has_attached_file :archive, 
-                    :url => '/system/media/archives/:id_partition/:style/:basename.:content_type_extension',
-                    :path => ":rails_root/public/system/media/archives/:id_partition/:style/:basename.:content_type_extension"
+                    :url => APP_CONFIG["video"]["url"],
+                    :path => APP_CONFIG["video"]["path"] 
   
   scope :views_asc, order("views ASC")
   scope :position_asc, order("position ASC")
@@ -26,6 +26,19 @@ class Video < ActiveRecord::Base
    extension = File.extname(archive_file_name).downcase
    seed = "--uebi-#{rand(10000)}--#{Time.now}-tv--"                    
    self.archive.instance_write :file_name, "#{Digest::SHA1.hexdigest(seed)[0,10]}#{extension}"
+  end
+  
+  
+  def set_nginx_video(video)
+    asset = video['video']
+    if asset && asset.respond_to?('[]')
+      self.archive = File.new(asset['filepath']) if asset['filepath']
+      self.archive_file_name = asset["original_name"]
+      self.archive_content_type = asset["content_type"]
+      self.title = video["title"]
+      
+      puts title
+    end
   end
   
   def self.next        
