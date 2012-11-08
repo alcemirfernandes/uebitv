@@ -76,10 +76,12 @@ ul {
 
 .live {
     width: 65px;
+		padding: 5px;
 }
 
 #sortable .queue {
     width: 50px;
+		padding: 8px;
 }
 
 .actions {
@@ -168,4 +170,8 @@ ul {
 	width: 340px;
 	box-shadow: none;
 	border-radius: 0;
+}
+
+.on {
+	background: url("/images/correct.png") no-repeat;
 }

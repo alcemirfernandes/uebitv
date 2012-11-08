@@ -56,6 +56,11 @@ class VideosController < ApplicationController
       live.update_attribute(:queue, false) 
     end
     
+    PUB_NUB.publish({
+      'channel' => "tvrealtimeguru",
+      'message' =>  "next_#{next_video.id}"
+      })
+    
     render :text => "#{next_video.archive_file_name}"
   end
   
@@ -73,6 +78,10 @@ class VideosController < ApplicationController
     # atualiza proximo video como ao vivo
     next_video.update_attributes(:live => true) if next_video         
   
+    PUB_NUB.publish({
+      'channel' => "tvrealtimeguru",
+      'message' =>  "inlive_#{next_video.id}"
+      })
 
     render :text => "OK"
   end  

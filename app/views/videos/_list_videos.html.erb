@@ -18,12 +18,44 @@
 				<div class="title"> <%= truncate(video.title, :length => 40) %> </div>
 				<div class="title"> <%= video.archive_file_name %> </div>
 				<div class="size"> <%= number_with_precision ((video.archive_file_size / 1.kilobyte)  / 1000.0), :precision => 2 %> MB </div>
-				<div class="live"> <%=  video.live ? image_tag("correct.png") : '' %> </div>	
-				<div class="queue"> <%=  video.queue ? image_tag("correct.png") : '' %> </div>
+				<div class="live <%= video.live ? 'on' : '' %>"></div>	
+				<div class="queue <%= video.queue ? 'on' : '' %>"></div>
 			</li>
 		<% end %>
 	</ul>
 <% end %>
+
+<div pub-key="pub-996204a9-ce96-4394-b44e-46000d10d272"  sub-key="sub-f167fc4f-6462-11e1-ab12-c1b33cd594ad" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+<script src="http://cdn.pubnub.com/pubnub-3.3.min.js"></script>
+<script>(function(){
+ 	
+    // LISTEN FOR MESSAGES
+    PUBNUB.subscribe({
+        channel    : "tvrealtimeguru",      // CONNECT TO THIS CHANNEL.
+ 
+        restore    : false,              // STAY CONNECTED, EVEN WHEN BROWSER IS CLOSED
+                                         // OR WHEN PAGE CHANGES.
+ 
+        callback   : function(message) { // RECEIVED A MESSAGE.
+			var object=message.split("_");
+			if(object[0] == "next") {
+				$("#sortable").find("div.queue.on").removeClass("on");
+				$("#"+object[1]).find("div.queue").addClass("on");
+			} else if (object[0] == "inlive")	{
+				$("#sortable").find("div.live.on").removeClass("on");
+				$("#"+object[1]).find("div.live").addClass("on");
+			}
+        }, 
+        disconnect : function() {        // LOST CONNECTION.
+        }, 
+        reconnect  : function() {        // CONNECTION RESTORED.
+        }, 
+        connect    : function() {        // CONNECTION ESTABLISHED.
+        }
+    })
+ 
+})();</script>
+
 <script>
    $(function() {
        $( "#sortable" ).sortable({
