@@ -43,7 +43,7 @@ ul {
 		padding: 10px;
 }
 
-.title, .live, .queue, .position, .size, .box-sortable {
+.title, .live, .queue, .position, .size, .box-sortable, .mediaplayer {
 		display: inline-block;
 }
 
@@ -174,4 +174,11 @@ ul {
 
 .on {
 	background: url("/images/correct.png") no-repeat;
+}
+
+.player {
+	text-align: center;
+}
+.player .rigth {
+	display: none;
 }

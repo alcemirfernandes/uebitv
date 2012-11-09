@@ -6,7 +6,7 @@
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
-	<body>
+	<body class="<%= action_name == 'player' ? 'player' : '' %>">
 		<div id="loading" style="display:none;">
 		</div>	
 		<div> 
